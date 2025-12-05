@@ -4,14 +4,18 @@ Experimental lab to explore **NIST OSCAL + AI agents** using **LangGraph** and *
 
 > One repo to play with: OSCAL catalogs, profiles, SSPs, digital-twin-ish ideas, and agentic AI.
 
-## What it does (v0.1)
+## What it does (v0.4)
 
 - Loads the official NIST SP 800-53 Rev 5 OSCAL catalog (JSON) from the
   [`usnistgov/oscal-content`](https://github.com/usnistgov/oscal-content) repo.
-- Flattens controls into text chunks and builds a vector index.
-- Exposes a LangGraph-based **ExplainerAgent**:
-  - Ask natural-language questions about controls (e.g. "What does AC-2 actually require?").
-  - Get answers grounded in the official OSCAL content.
+- Flattens controls into text chunks and builds a vector index (1196 controls).
+- Exposes four LangGraph-based agents:
+  - **ExplainerAgent** - RAG-based Q&A over 800-53 controls
+  - **DiffAgent** - Compare two OSCAL SSPs and summarize changes
+  - **ProfileBuilderAgent** - Generate OSCAL profiles from natural language descriptions
+  - **ValidatorAgent** - Schema validation with LLM-powered error explanations
+
+> Note: This is a sandbox - expect rough edges, but also a lot of room to experiment
 
 Under the hood it uses:
 
@@ -44,17 +48,29 @@ export OPENAI_EMBED_MODEL=text-embedding-3-small
 
 Or copy `.env.example` to `.env` and fill in your values.
 
-## Run the OSCAL Explainer
+## Run the CLI
 
 ```bash
 python -m oscal_agent_lab.cli
 ```
 
-Then ask things like:
+### Commands
 
+**Q&A (ExplainerAgent)** - just type your question:
 - `Explain AC-2 in plain language`
 - `Which controls are about audit logging?`
 - `What are the main responsibilities behind the IR-4 family?`
+
+**Diff (DiffAgent)** - compare two SSPs:
+- `diff path/to/ssp1.json path/to/ssp2.json`
+
+**Profile (ProfileBuilderAgent)** - generate OSCAL profiles:
+- `profile healthcare compliance requirements`
+- `profile --baseline moderate cloud security controls`
+- Baselines: `low` (149 controls), `moderate` (287), `high` (370)
+
+**Validate (ValidatorAgent)** - validate OSCAL files:
+- `validate path/to/file.json`
 
 ## Project Structure
 
@@ -74,19 +90,19 @@ oscal-agent-lab/
       agents/
         __init__.py
         explainer.py      # ExplainerAgent (v0.1)
-        diff.py           # DiffAgent (planned)
-        profile_builder.py# ProfileBuilderAgent (planned)
-        validator.py      # ValidatorAgent (planned)
+        diff.py           # DiffAgent (v0.2)
+        profile_builder.py# ProfileBuilderAgent (v0.3)
+        validator.py      # ValidatorAgent (v0.4)
       graph.py            # LangGraph graph wiring the agents
       cli.py              # simple CLI "copilot" entry point
 ```
 
 ## Roadmap
 
-- [x] **ExplainerAgent** - Q&A over 800-53 controls using RAG
-- [ ] **DiffAgent** - compare two OSCAL SSPs and summarize what changed
-- [ ] **ProfileBuilderAgent** - propose OSCAL profiles from natural language
-- [ ] **ValidatorAgent** - run schema validation and explain OSCAL errors
+- [x] **ExplainerAgent** (v0.1) - Q&A over 800-53 controls using RAG
+- [x] **DiffAgent** (v0.2) - compare two OSCAL SSPs and summarize what changed
+- [x] **ProfileBuilderAgent** (v0.3) - generate OSCAL profiles from natural language
+- [x] **ValidatorAgent** (v0.4) - schema validation with LLM error explanations
 - [ ] **Digital twin experiments** - sync live state with OSCAL SSP and detect drift
 
 ## Resources
@@ -98,4 +114,4 @@ oscal-agent-lab/
 
 ---
 
-This is a sandbox - expect rough edges, but also a lot of room to experiment. [test]
+Again, as mentioned above this is a sandbox - expect rough edges, but also a lot of room to experiment.
