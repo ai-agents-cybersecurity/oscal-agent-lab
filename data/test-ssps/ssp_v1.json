@@ -1,0 +1,93 @@
+{
+  "system-security-plan": {
+    "uuid": "test-ssp-v1-uuid",
+    "metadata": {
+      "title": "Test System SSP v1",
+      "version": "1.0.0",
+      "oscal-version": "1.1.1"
+    },
+    "system-characteristics": {
+      "system-name": "Test System v1",
+      "system-id": [{"id": "test-system-001"}]
+    },
+    "import-profile": {
+      "href": "#profile"
+    },
+    "system-implementation": {
+      "users": [],
+      "components": [
+        {
+          "uuid": "comp-001",
+          "type": "software",
+          "title": "Web Application",
+          "description": "Main web application component"
+        }
+      ]
+    },
+    "control-implementation": {
+      "description": "Control implementations for Test System",
+      "implemented-requirements": [
+        {
+          "uuid": "ir-ac-2",
+          "control-id": "ac-2",
+          "statements": [
+            {
+              "statement-id": "ac-2_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "The system uses Active Directory for account management. Accounts are provisioned through IT ticketing system and require manager approval."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-ac-3",
+          "control-id": "ac-3",
+          "statements": [
+            {
+              "statement-id": "ac-3_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "Role-based access control (RBAC) is implemented. Users are assigned roles that determine their access permissions."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-au-2",
+          "control-id": "au-2",
+          "statements": [
+            {
+              "statement-id": "au-2_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "The system logs authentication events, authorization failures, and administrative actions using the built-in logging framework."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-sc-7",
+          "control-id": "sc-7",
+          "statements": [
+            {
+              "statement-id": "sc-7_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "Network traffic is filtered through a firewall. Only ports 443 and 80 are exposed externally."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

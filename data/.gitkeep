@@ -1,0 +1,2 @@
+# This directory will contain the oscal-content submodule
+# Run: git submodule add https://github.com/usnistgov/oscal-content.git data/oscal-content

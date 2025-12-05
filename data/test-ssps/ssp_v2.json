@@ -1,0 +1,118 @@
+{
+  "system-security-plan": {
+    "uuid": "test-ssp-v2-uuid",
+    "metadata": {
+      "title": "Test System SSP v2",
+      "version": "2.0.0",
+      "oscal-version": "1.1.1"
+    },
+    "system-characteristics": {
+      "system-name": "Test System v2",
+      "system-id": [{"id": "test-system-001"}]
+    },
+    "import-profile": {
+      "href": "#profile"
+    },
+    "system-implementation": {
+      "users": [],
+      "components": [
+        {
+          "uuid": "comp-001",
+          "type": "software",
+          "title": "Web Application",
+          "description": "Main web application component"
+        },
+        {
+          "uuid": "comp-002",
+          "type": "software",
+          "title": "SIEM System",
+          "description": "Security information and event management"
+        }
+      ]
+    },
+    "control-implementation": {
+      "description": "Control implementations for Test System v2 - Enhanced security",
+      "implemented-requirements": [
+        {
+          "uuid": "ir-ac-2-v2",
+          "control-id": "ac-2",
+          "statements": [
+            {
+              "statement-id": "ac-2_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "The system uses Azure AD for account management with automated provisioning via SCIM. Accounts require manager approval and are automatically disabled after 90 days of inactivity. MFA is enforced for all users."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-ac-3-v2",
+          "control-id": "ac-3",
+          "statements": [
+            {
+              "statement-id": "ac-3_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "Role-based access control (RBAC) is implemented. Users are assigned roles that determine their access permissions."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-au-2-v2",
+          "control-id": "au-2",
+          "statements": [
+            {
+              "statement-id": "au-2_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-001",
+                  "description": "Comprehensive logging implemented: authentication events, authorization decisions, data access, administrative actions, and security-relevant configuration changes. Logs are forwarded to SIEM in real-time."
+                },
+                {
+                  "component-uuid": "comp-002",
+                  "description": "SIEM aggregates logs from all system components and provides real-time alerting for security events."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-au-6-v2",
+          "control-id": "au-6",
+          "statements": [
+            {
+              "statement-id": "au-6_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-002",
+                  "description": "Security team reviews audit logs weekly. SIEM provides automated analysis and generates alerts for anomalous patterns. Monthly audit reports are provided to management."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uuid": "ir-ir-4-v2",
+          "control-id": "ir-4",
+          "statements": [
+            {
+              "statement-id": "ir-4_stmt",
+              "by-components": [
+                {
+                  "component-uuid": "comp-002",
+                  "description": "Incident response procedures are documented. SIEM automatically creates tickets for security incidents. Response team is notified within 15 minutes of critical alerts."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

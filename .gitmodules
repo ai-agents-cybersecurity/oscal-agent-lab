@@ -1,0 +1,3 @@
+[submodule "data/oscal-content"]
+	path = data/oscal-content
+	url = https://github.com/usnistgov/oscal-content.git
