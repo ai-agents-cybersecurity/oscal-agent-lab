@@ -187,7 +187,6 @@ Validation:
                 continue
 
             from .agents.diff import compare_ssps, generate_diff_summary
-            from pathlib import Path
 
             ssp_a, ssp_b = parts[1], parts[2]
             if not Path(ssp_a).exists():
